@@ -14,5 +14,7 @@ public class ExampleUnitTest {
     public void testHelloWorld(){
         MyComponent myComponent = DaggerMyComponent.create();
         System.out.println("result = " + myComponent.getString());
+        DuplicationComponent duplicationComponent = DaggerDuplicationComponent.create();
+        System.out.println("result = " + duplicationComponent.getString());
     }
 }
