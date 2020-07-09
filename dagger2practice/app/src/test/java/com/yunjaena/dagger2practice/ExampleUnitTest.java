@@ -17,4 +17,10 @@ public class ExampleUnitTest {
         DuplicationComponent duplicationComponent = DaggerDuplicationComponent.create();
         System.out.println("result = " + duplicationComponent.getString());
     }
+
+    @Test
+    public void nullableTest(){
+        NullableComponent nullableComponent = DaggerNullableComponent.create();
+        System.out.println(nullableComponent.getInteger());
+    }
 }
