@@ -1,9 +1,17 @@
 package com.yunjaena.dagger2practice;
 
+import com.yunjaena.dagger2practice.person.DaggerPersonComponent;
+import com.yunjaena.dagger2practice.person.PersonA;
+import com.yunjaena.dagger2practice.person.PersonB;
+import com.yunjaena.dagger2practice.person.PersonComponent;
+
 import org.junit.Test;
+
+import dagger.MembersInjector;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -29,11 +37,35 @@ public class ExampleUnitTest {
     public void testMemberInjection() {
         MyClass myClass = new MyClass();
         String str = myClass.getStr();
-       // assertNotNull("조회 결과 null",str); // null이 아님을 확인
+        assertNull("조회 결과 null", str); // null임을 확인
         MemberInjectionComponent memberInjectionComponent = DaggerMemberInjectionComponent.create();
         memberInjectionComponent.inject(myClass);
         str = myClass.getStr();
         assertEquals("Hello World", str); // str = Hello world
         System.out.println(str);
+    }
+
+    @Test
+    public void testMemberInjectionWithMembersInjectorClass(){
+        MyClass myClass = new MyClass();
+        String str = myClass.getStr();
+        System.out.println("result = " + str); // str = null;
+        MemberInjectionComponent memberInjectionComponent = DaggerMemberInjectionComponent.create();
+        MembersInjector<MyClass> injector = memberInjectionComponent.getInjector();
+        injector.injectMembers(myClass);
+        str = myClass.getStr();
+        System.out.println("result = " + str); // str != null;
+    }
+
+    @Test
+    public void testInjection(){
+        PersonComponent personComponent = DaggerPersonComponent.create();
+        PersonA personA = personComponent.getPersonA();
+
+        System.out.println(personA.getName() + ":" + personA.getAge());
+        PersonB personB = new PersonB();
+        personComponent.inject(personB);
+        assertEquals("Charles", personB.getName()); // 이름
+        assertEquals(100, personB.getAge()); // 나이
     }
 }
