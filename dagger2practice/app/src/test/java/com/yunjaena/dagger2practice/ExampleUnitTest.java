@@ -1,5 +1,9 @@
 package com.yunjaena.dagger2practice;
 
+import com.yunjaena.dagger2practice.inheritance.Child;
+import com.yunjaena.dagger2practice.inheritance.DaggerInheritanceComponent;
+import com.yunjaena.dagger2practice.inheritance.InheritanceComponent;
+import com.yunjaena.dagger2practice.inheritance.Self;
 import com.yunjaena.dagger2practice.person.DaggerPersonComponent;
 import com.yunjaena.dagger2practice.person.PersonA;
 import com.yunjaena.dagger2practice.person.PersonB;
@@ -67,5 +71,15 @@ public class ExampleUnitTest {
         personComponent.inject(personB);
         assertEquals("Charles", personB.getName()); // 이름
         assertEquals(100, personB.getAge()); // 나이
+    }
+
+    @Test
+    public void inheritanceTest(){
+        InheritanceComponent inheritanceComponent = DaggerInheritanceComponent.create();
+        Child child = new Child();
+        inheritanceComponent.inject(child);
+        assertNotNull(child.getA()); // child.a != null
+        assertNotNull(child.getB()); // child.b != null
+        assertNull(child.getC()); // child.c -= null
     }
 }
