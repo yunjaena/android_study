@@ -82,4 +82,12 @@ public class ExampleUnitTest {
         assertNotNull(child.getB()); // child.b != null
         assertNull(child.getC()); // child.c -= null
     }
+
+    @Test
+    public void builderTest(){
+        MyComponent myComponent = DaggerMyComponent.builder().setMyModule(new MyModule()).build();
+        System.out.println(myComponent.getString());
+        myComponent = DaggerMyComponent.create();
+        System.out.println(myComponent.getString());
+    }
 }
