@@ -4,6 +4,9 @@ import com.yunjaena.dagger2practice.inheritance.Child;
 import com.yunjaena.dagger2practice.inheritance.DaggerInheritanceComponent;
 import com.yunjaena.dagger2practice.inheritance.InheritanceComponent;
 import com.yunjaena.dagger2practice.inheritance.Self;
+import com.yunjaena.dagger2practice.lazy.Counter;
+import com.yunjaena.dagger2practice.lazy.CounterComponent;
+import com.yunjaena.dagger2practice.lazy.DaggerCounterComponent;
 import com.yunjaena.dagger2practice.person.DaggerPersonComponent;
 import com.yunjaena.dagger2practice.person.PersonA;
 import com.yunjaena.dagger2practice.person.PersonB;
@@ -89,5 +92,13 @@ public class ExampleUnitTest {
         System.out.println(myComponent.getString());
         myComponent = DaggerMyComponent.create();
         System.out.println(myComponent.getString());
+    }
+
+    @Test
+    public void testLazy(){
+        CounterComponent counterComponent = DaggerCounterComponent.create();
+        Counter counter = new Counter();
+        counterComponent.inject(counter);
+        counter.printLazy();
     }
 }
