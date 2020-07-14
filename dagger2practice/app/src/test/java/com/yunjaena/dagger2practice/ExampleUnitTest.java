@@ -15,6 +15,8 @@ import com.yunjaena.dagger2practice.person.DaggerPersonComponent;
 import com.yunjaena.dagger2practice.person.PersonA;
 import com.yunjaena.dagger2practice.person.PersonB;
 import com.yunjaena.dagger2practice.person.PersonComponent;
+import com.yunjaena.dagger2practice.singleton.DaggerSingletonComponent;
+import com.yunjaena.dagger2practice.singleton.SingletonComponent;
 
 import org.junit.Test;
 
@@ -23,6 +25,7 @@ import dagger.MembersInjector;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -129,6 +132,18 @@ public class ExampleUnitTest {
         DaggerDuplicateAnnotationComponent.create().inject(duplicateAnnotation);
         System.out.println(duplicateAnnotation.getStrHello());
         System.out.println(duplicateAnnotation.getStrWorld());
+    }
+
+    @Test
+    public void testObjectIdentify(){
+        SingletonComponent singletonComponent = DaggerSingletonComponent.create();
+        Object temp1 = singletonComponent.getObject();
+        Object temp2 = singletonComponent.getObject();
+        System.out.println(temp1.hashCode());
+        System.out.println(temp2.hashCode());
+        assertNotNull(temp1);
+        assertNotNull(temp2);
+        assertSame(temp1, temp2);
     }
 
 }
