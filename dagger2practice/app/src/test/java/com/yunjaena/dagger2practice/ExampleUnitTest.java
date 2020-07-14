@@ -1,5 +1,7 @@
 package com.yunjaena.dagger2practice;
 
+import com.yunjaena.dagger2practice.duplicate.DaggerDuplicateComponent;
+import com.yunjaena.dagger2practice.duplicate.Duplicate;
 import com.yunjaena.dagger2practice.inheritance.Child;
 import com.yunjaena.dagger2practice.inheritance.DaggerInheritanceComponent;
 import com.yunjaena.dagger2practice.inheritance.InheritanceComponent;
@@ -110,4 +112,12 @@ public class ExampleUnitTest {
         counter.printProvider();
     }
 
+    @Test
+    public void duplicateTest()
+    {
+        Duplicate duplicate = new Duplicate();
+        DaggerDuplicateComponent.create().inject(duplicate);
+        System.out.println(duplicate.getStrHello());
+        System.out.println(duplicate.getStrWorld());
+    }
 }
