@@ -2,6 +2,8 @@ package com.yunjaena.dagger2practice;
 
 import com.yunjaena.dagger2practice.duplicate.DaggerDuplicateComponent;
 import com.yunjaena.dagger2practice.duplicate.Duplicate;
+import com.yunjaena.dagger2practice.duplicateannotation.DaggerDuplicateAnnotationComponent;
+import com.yunjaena.dagger2practice.duplicateannotation.DuplicateAnnotation;
 import com.yunjaena.dagger2practice.inheritance.Child;
 import com.yunjaena.dagger2practice.inheritance.DaggerInheritanceComponent;
 import com.yunjaena.dagger2practice.inheritance.InheritanceComponent;
@@ -120,4 +122,13 @@ public class ExampleUnitTest {
         System.out.println(duplicate.getStrHello());
         System.out.println(duplicate.getStrWorld());
     }
+
+    @Test
+    public void duplicateAnnotationTest(){
+        DuplicateAnnotation duplicateAnnotation = new DuplicateAnnotation();
+        DaggerDuplicateAnnotationComponent.create().inject(duplicateAnnotation);
+        System.out.println(duplicateAnnotation.getStrHello());
+        System.out.println(duplicateAnnotation.getStrWorld());
+    }
+
 }
