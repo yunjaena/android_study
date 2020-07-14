@@ -101,4 +101,13 @@ public class ExampleUnitTest {
         counterComponent.inject(counter);
         counter.printLazy();
     }
+
+    @Test
+    public void testProvider(){
+        com.yunjaena.dagger2practice.provider.CounterComponent counterComponent = com.yunjaena.dagger2practice.provider.DaggerCounterComponent.create();
+        com.yunjaena.dagger2practice.provider.Counter counter = new com.yunjaena.dagger2practice.provider.Counter();
+        counterComponent.inject(counter);
+        counter.printProvider();
+    }
+
 }
