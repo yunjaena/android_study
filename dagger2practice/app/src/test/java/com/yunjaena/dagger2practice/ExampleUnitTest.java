@@ -7,7 +7,6 @@ import com.yunjaena.dagger2practice.duplicateannotation.DuplicateAnnotation;
 import com.yunjaena.dagger2practice.inheritance.Child;
 import com.yunjaena.dagger2practice.inheritance.DaggerInheritanceComponent;
 import com.yunjaena.dagger2practice.inheritance.InheritanceComponent;
-import com.yunjaena.dagger2practice.inheritance.Self;
 import com.yunjaena.dagger2practice.lazy.Counter;
 import com.yunjaena.dagger2practice.lazy.CounterComponent;
 import com.yunjaena.dagger2practice.lazy.DaggerCounterComponent;
@@ -60,7 +59,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testMemberInjectionWithMembersInjectorClass(){
+    public void testMemberInjectionWithMembersInjectorClass() {
         MyClass myClass = new MyClass();
         String str = myClass.getStr();
         System.out.println("result = " + str); // str = null;
@@ -72,7 +71,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testInjection(){
+    public void testInjection() {
         PersonComponent personComponent = DaggerPersonComponent.create();
         PersonA personA = personComponent.getPersonA();
 
@@ -84,7 +83,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void inheritanceTest(){
+    public void inheritanceTest() {
         InheritanceComponent inheritanceComponent = DaggerInheritanceComponent.create();
         Child child = new Child();
         inheritanceComponent.inject(child);
@@ -94,7 +93,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void builderTest(){
+    public void builderTest() {
         MyComponent myComponent = DaggerMyComponent.builder().setMyModule(new MyModule()).build();
         System.out.println(myComponent.getString());
         myComponent = DaggerMyComponent.create();
@@ -102,7 +101,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testLazy(){
+    public void testLazy() {
         CounterComponent counterComponent = DaggerCounterComponent.create();
         Counter counter = new Counter();
         counterComponent.inject(counter);
@@ -110,7 +109,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testProvider(){
+    public void testProvider() {
         com.yunjaena.dagger2practice.provider.CounterComponent counterComponent = com.yunjaena.dagger2practice.provider.DaggerCounterComponent.create();
         com.yunjaena.dagger2practice.provider.Counter counter = new com.yunjaena.dagger2practice.provider.Counter();
         counterComponent.inject(counter);
@@ -118,8 +117,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void duplicateTest()
-    {
+    public void duplicateTest() {
         Duplicate duplicate = new Duplicate();
         DaggerDuplicateComponent.create().inject(duplicate);
         System.out.println(duplicate.getStrHello());
@@ -127,7 +125,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void duplicateAnnotationTest(){
+    public void duplicateAnnotationTest() {
         DuplicateAnnotation duplicateAnnotation = new DuplicateAnnotation();
         DaggerDuplicateAnnotationComponent.create().inject(duplicateAnnotation);
         System.out.println(duplicateAnnotation.getStrHello());
@@ -135,7 +133,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testObjectIdentify(){
+    public void testObjectIdentify() {
         SingletonComponent singletonComponent = DaggerSingletonComponent.create();
         Object temp1 = singletonComponent.getObject();
         Object temp2 = singletonComponent.getObject();
