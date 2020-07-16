@@ -1,5 +1,8 @@
 package com.yunjaena.dagger2practice;
 
+import com.yunjaena.dagger2practice.bindsoptionalof.DaggerNoStrComponent;
+import com.yunjaena.dagger2practice.bindsoptionalof.DaggerStrComponent;
+import com.yunjaena.dagger2practice.bindsoptionalof.Foo;
 import com.yunjaena.dagger2practice.duplicate.DaggerDuplicateComponent;
 import com.yunjaena.dagger2practice.duplicate.Duplicate;
 import com.yunjaena.dagger2practice.duplicateannotation.DaggerDuplicateAnnotationComponent;
@@ -142,6 +145,27 @@ public class ExampleUnitTest {
         assertNotNull(temp1);
         assertNotNull(temp2);
         assertSame(temp1, temp2);
+    }
+
+    @Test
+    public void testBindsOptionalOf(){
+        Foo foo = new Foo();
+        DaggerStrComponent.create().inject(foo);
+        System.out.println(foo.str.isPresent());
+        System.out.println(foo.str.get());
+        System.out.println(foo.str2.isPresent());
+        System.out.println(foo.str2.get().get());
+        System.out.println(foo.str3.isPresent());
+        System.out.println(foo.str3.get().get());
+
+
+        DaggerNoStrComponent.create().inject(foo);
+        System.out.println(foo.str.isPresent());
+        System.out.println(foo.str.get());
+        System.out.println(foo.str2.isPresent());
+        System.out.println(foo.str2.get().get());
+        System.out.println(foo.str3.isPresent());
+        System.out.println(foo.str3.get().get());
     }
 
 }
