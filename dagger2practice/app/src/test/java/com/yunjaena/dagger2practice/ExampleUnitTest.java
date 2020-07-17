@@ -1,5 +1,8 @@
 package com.yunjaena.dagger2practice;
 
+import com.yunjaena.dagger2practice.bindsinstance.BindsComponent;
+import com.yunjaena.dagger2practice.bindsinstance.DaggerBindsComponent;
+import com.yunjaena.dagger2practice.bindsinstance.FooBindsInstance;
 import com.yunjaena.dagger2practice.bindsoptionalof.DaggerNoStrComponent;
 import com.yunjaena.dagger2practice.bindsoptionalof.DaggerStrComponent;
 import com.yunjaena.dagger2practice.bindsoptionalof.Foo;
@@ -166,6 +169,18 @@ public class ExampleUnitTest {
         System.out.println(foo.str2.get().get());
         System.out.println(foo.str3.isPresent());
         System.out.println(foo.str3.get().get());
+    }
+
+    @Test
+    public void testBindsInstance(){
+        String hello = "Hello World";
+
+        FooBindsInstance foo = new FooBindsInstance();
+        BindsComponent component = DaggerBindsComponent.builder()
+                .setString(hello)
+                .build();
+        component.inject(foo);
+        assertEquals("Hello World", foo.str);
     }
 
 }
