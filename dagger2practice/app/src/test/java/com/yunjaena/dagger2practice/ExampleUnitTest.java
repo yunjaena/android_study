@@ -20,6 +20,8 @@ import com.yunjaena.dagger2practice.person.DaggerPersonComponent;
 import com.yunjaena.dagger2practice.person.PersonA;
 import com.yunjaena.dagger2practice.person.PersonB;
 import com.yunjaena.dagger2practice.person.PersonComponent;
+import com.yunjaena.dagger2practice.set.DaggerSetComponent;
+import com.yunjaena.dagger2practice.set.FooSet;
 import com.yunjaena.dagger2practice.singleton.DaggerSingletonComponent;
 import com.yunjaena.dagger2practice.singleton.SingletonComponent;
 
@@ -181,6 +183,13 @@ public class ExampleUnitTest {
                 .build();
         component.inject(foo);
         assertEquals("Hello World", foo.str);
+    }
+
+    @Test
+    public void testMultibindingSet(){
+        FooSet fooSet = new FooSet();
+        DaggerSetComponent.create().inject(fooSet);
+        fooSet.print();
     }
 
 }
