@@ -30,8 +30,13 @@ import com.yunjaena.dagger2practice.set.DaggerSetComponent;
 import com.yunjaena.dagger2practice.set.FooSet;
 import com.yunjaena.dagger2practice.singleton.DaggerSingletonComponent;
 import com.yunjaena.dagger2practice.singleton.SingletonComponent;
+import com.yunjaena.dagger2practice.subcomponentmultibinding.ChildComponent;
+import com.yunjaena.dagger2practice.subcomponentmultibinding.DaggerParentComponent;
+import com.yunjaena.dagger2practice.subcomponentmultibinding.ParentComponent;
 
 import org.junit.Test;
+
+import java.util.Iterator;
 
 import dagger.MembersInjector;
 
@@ -159,7 +164,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testBindsOptionalOf(){
+    public void testBindsOptionalOf() {
         Foo foo = new Foo();
         DaggerStrComponent.create().inject(foo);
         System.out.println(foo.str.isPresent());
@@ -180,7 +185,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testBindsInstance(){
+    public void testBindsInstance() {
         String hello = "Hello World";
 
         FooBindsInstance foo = new FooBindsInstance();
@@ -192,14 +197,14 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testMultibindingSet(){
+    public void testMultibindingSet() {
         FooSet fooSet = new FooSet();
         DaggerSetComponent.create().inject(fooSet);
         fooSet.print();
     }
 
     @Test
-    public void testMultibindingMapTest(){
+    public void testMultibindingMapTest() {
         MapComponent component = DaggerMapComponent.create();
         long value = component.getLongsByString().get("foo");
         String str = component.getStringByClass().get(FooMap.class);
@@ -209,7 +214,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testCustomMapKey(){
+    public void testCustomMapKey() {
         MapKeyComponent component = DaggerMapKeyComponent.create();
         String cat = component.getStringsByAnimal().get(Animal.CAT);
         String dog = component.getStringsByAnimal().get(Animal.DOG);
@@ -218,6 +223,25 @@ public class ExampleUnitTest {
         System.out.println(cat);
         System.out.println(dog);
         System.out.println(number);
+    }
+
+    @Test
+    public void testMultibindingWithSubcomopnent() {
+        ParentComponent parentComp = DaggerParentComponent.create();
+        ChildComponent childComp = parentComp.childCompBuilder().build();
+        System.out.println("List set in Parent");
+
+        Iterator itr = parentComp.strings().iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+
+        System.out.println("List set In Child");
+
+        itr = childComp.strings().iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
     }
 
 }
