@@ -22,6 +22,8 @@ import com.yunjaena.dagger2practice.lazy.DaggerCounterComponent;
 import com.yunjaena.dagger2practice.map.DaggerMapComponent;
 import com.yunjaena.dagger2practice.map.FooMap;
 import com.yunjaena.dagger2practice.map.MapComponent;
+import com.yunjaena.dagger2practice.multibind.DaggerMultibindsComponent;
+import com.yunjaena.dagger2practice.multibind.MultibindsComponent;
 import com.yunjaena.dagger2practice.person.DaggerPersonComponent;
 import com.yunjaena.dagger2practice.person.PersonA;
 import com.yunjaena.dagger2practice.person.PersonB;
@@ -241,6 +243,15 @@ public class ExampleUnitTest {
         itr = childComp.strings().iterator();
         while (itr.hasNext()) {
             System.out.println(itr.next());
+        }
+    }
+
+    @Test
+    public void testMultibinds(){
+        MultibindsComponent component = DaggerMultibindsComponent.create();
+
+        for(String s : component.getString()){
+            System.out.println(s);
         }
     }
 
