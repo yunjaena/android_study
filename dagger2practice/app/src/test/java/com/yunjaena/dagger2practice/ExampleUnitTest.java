@@ -6,6 +6,9 @@ import com.yunjaena.dagger2practice.bindsinstance.FooBindsInstance;
 import com.yunjaena.dagger2practice.bindsoptionalof.DaggerNoStrComponent;
 import com.yunjaena.dagger2practice.bindsoptionalof.DaggerStrComponent;
 import com.yunjaena.dagger2practice.bindsoptionalof.Foo;
+import com.yunjaena.dagger2practice.custommap.Animal;
+import com.yunjaena.dagger2practice.custommap.DaggerMapKeyComponent;
+import com.yunjaena.dagger2practice.custommap.MapKeyComponent;
 import com.yunjaena.dagger2practice.duplicate.DaggerDuplicateComponent;
 import com.yunjaena.dagger2practice.duplicate.Duplicate;
 import com.yunjaena.dagger2practice.duplicateannotation.DaggerDuplicateAnnotationComponent;
@@ -203,6 +206,18 @@ public class ExampleUnitTest {
 
         System.out.println(value);
         System.out.println(str);
+    }
+
+    @Test
+    public void testCustomMapKey(){
+        MapKeyComponent component = DaggerMapKeyComponent.create();
+        String cat = component.getStringsByAnimal().get(Animal.CAT);
+        String dog = component.getStringsByAnimal().get(Animal.DOG);
+        String number = component.getStringsByNumber().get(Float.class);
+
+        System.out.println(cat);
+        System.out.println(dog);
+        System.out.println(number);
     }
 
 }
