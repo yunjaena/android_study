@@ -16,6 +16,9 @@ import com.yunjaena.dagger2practice.inheritance.InheritanceComponent;
 import com.yunjaena.dagger2practice.lazy.Counter;
 import com.yunjaena.dagger2practice.lazy.CounterComponent;
 import com.yunjaena.dagger2practice.lazy.DaggerCounterComponent;
+import com.yunjaena.dagger2practice.map.DaggerMapComponent;
+import com.yunjaena.dagger2practice.map.FooMap;
+import com.yunjaena.dagger2practice.map.MapComponent;
 import com.yunjaena.dagger2practice.person.DaggerPersonComponent;
 import com.yunjaena.dagger2practice.person.PersonA;
 import com.yunjaena.dagger2practice.person.PersonB;
@@ -190,6 +193,16 @@ public class ExampleUnitTest {
         FooSet fooSet = new FooSet();
         DaggerSetComponent.create().inject(fooSet);
         fooSet.print();
+    }
+
+    @Test
+    public void testMultibindingMapTest(){
+        MapComponent component = DaggerMapComponent.create();
+        long value = component.getLongsByString().get("foo");
+        String str = component.getStringByClass().get(FooMap.class);
+
+        System.out.println(value);
+        System.out.println(str);
     }
 
 }
