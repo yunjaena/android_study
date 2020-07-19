@@ -6,6 +6,7 @@ import com.yunjaena.dagger2practice.bindsinstance.FooBindsInstance;
 import com.yunjaena.dagger2practice.bindsoptionalof.DaggerNoStrComponent;
 import com.yunjaena.dagger2practice.bindsoptionalof.DaggerStrComponent;
 import com.yunjaena.dagger2practice.bindsoptionalof.Foo;
+import com.yunjaena.dagger2practice.coffee.Cafe;
 import com.yunjaena.dagger2practice.custommap.Animal;
 import com.yunjaena.dagger2practice.custommap.DaggerMapKeyComponent;
 import com.yunjaena.dagger2practice.custommap.MapKeyComponent;
@@ -253,6 +254,14 @@ public class ExampleUnitTest {
         for(String s : component.getString()){
             System.out.println(s);
         }
+    }
+
+    @Test
+    public void testCafe(){
+        Cafe cafe = new Cafe();
+        System.out.println(cafe.orderCoffee());
+        System.out.println(cafe.orderCoffee());
+        System.out.println(cafe.orderCoffee());
     }
 
 }
