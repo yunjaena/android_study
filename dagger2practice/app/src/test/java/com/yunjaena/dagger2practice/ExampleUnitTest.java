@@ -1,5 +1,15 @@
 package com.yunjaena.dagger2practice;
 
+import com.yunjaena.dagger2practice.basic.DaggerDuplicationComponent;
+import com.yunjaena.dagger2practice.basic.DaggerMemberInjectionComponent;
+import com.yunjaena.dagger2practice.basic.DaggerMyComponent;
+import com.yunjaena.dagger2practice.basic.DaggerNullableComponent;
+import com.yunjaena.dagger2practice.basic.DuplicationComponent;
+import com.yunjaena.dagger2practice.basic.MemberInjectionComponent;
+import com.yunjaena.dagger2practice.basic.MyClass;
+import com.yunjaena.dagger2practice.basic.MyComponent;
+import com.yunjaena.dagger2practice.basic.MyModule;
+import com.yunjaena.dagger2practice.basic.NullableComponent;
 import com.yunjaena.dagger2practice.bindsinstance.BindsComponent;
 import com.yunjaena.dagger2practice.bindsinstance.DaggerBindsComponent;
 import com.yunjaena.dagger2practice.bindsinstance.FooBindsInstance;

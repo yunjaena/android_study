@@ -1,8 +1,10 @@
-package com.yunjaena.dagger2practice;
+package com.yunjaena.dagger2practice.basic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.yunjaena.dagger2practice.R;
 
 public class MainActivity extends AppCompatActivity {
 

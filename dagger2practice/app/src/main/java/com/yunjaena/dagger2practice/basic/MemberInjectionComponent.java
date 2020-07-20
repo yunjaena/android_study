@@ -1,4 +1,4 @@
-package com.yunjaena.dagger2practice;
+package com.yunjaena.dagger2practice.basic;
 
 import dagger.Component;
 import dagger.MembersInjector;
