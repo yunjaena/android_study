@@ -10,6 +10,10 @@ import com.yunjaena.dagger2practice.coffee.Cafe;
 import com.yunjaena.dagger2practice.custommap.Animal;
 import com.yunjaena.dagger2practice.custommap.DaggerMapKeyComponent;
 import com.yunjaena.dagger2practice.custommap.MapKeyComponent;
+import com.yunjaena.dagger2practice.dependency.ComponentA;
+import com.yunjaena.dagger2practice.dependency.ComponentB;
+import com.yunjaena.dagger2practice.dependency.DaggerComponentA;
+import com.yunjaena.dagger2practice.dependency.DaggerComponentB;
 import com.yunjaena.dagger2practice.duplicate.DaggerDuplicateComponent;
 import com.yunjaena.dagger2practice.duplicate.Duplicate;
 import com.yunjaena.dagger2practice.duplicateannotation.DaggerDuplicateAnnotationComponent;
@@ -262,6 +266,18 @@ public class ExampleUnitTest {
         System.out.println(cafe.orderCoffee());
         System.out.println(cafe.orderCoffee());
         System.out.println(cafe.orderCoffee());
+    }
+
+    @Test
+    public void testDependency(){
+        com.yunjaena.dagger2practice.dependency.Foo foo = new com.yunjaena.dagger2practice.dependency.Foo();
+        ComponentA componentA = DaggerComponentA.create();
+        ComponentB componentB = DaggerComponentB.builder()
+                .componentA(componentA)
+                .build();
+        componentB.inject(foo);
+        System.out.println(foo.str);
+        System.out.println(foo.integer);
     }
 
 }
