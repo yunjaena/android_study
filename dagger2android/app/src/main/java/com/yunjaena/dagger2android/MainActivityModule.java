@@ -1,7 +1,15 @@
 package com.yunjaena.dagger2android;
 
-import dagger.Module;
+import com.yunjaena.dagger2android.scope.ActivityScope;
 
-@Module
+import dagger.Module;
+import dagger.Provides;
+
+@Module(subcomponents = MainFragmentComponent.class)
 public class MainActivityModule {
+    @Provides
+    @ActivityScope
+    String provideActivityName() {
+        return MainActivity.class.getSimpleName();
+    }
 }

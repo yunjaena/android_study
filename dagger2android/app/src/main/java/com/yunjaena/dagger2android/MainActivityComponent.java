@@ -8,6 +8,9 @@ import dagger.Subcomponent;
 @Subcomponent(modules = MainActivityModule.class)
 @ActivityScope
 public interface MainActivityComponent {
+    MainFragmentComponent.Builder mainFragmentComponentBuilder();
+
+    void inject(MainActivity activity);
 
     @Subcomponent.Builder
     interface Builder {
