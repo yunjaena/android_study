@@ -12,6 +12,22 @@ var num = 10
 var hello = "hello"
 var point = 3.4
 
-fun main(args:Array<String>){
+val fix = 20
 
+fun main(args:Array<String>){
+    println(num)
+    println(hello)
+    println(point)
+
+    num = 100
+    hello = "Good Bye"
+    point = 10.4
+
+    println(fix)
+    println(num)
+    println(hello)
+    println(point)
+    println(fix)
+
+    // fix = 500 => Val cannot be reassigned
 }
