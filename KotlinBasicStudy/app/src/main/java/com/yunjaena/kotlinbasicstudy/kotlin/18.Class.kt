@@ -27,6 +27,17 @@ fun main(args: Array<String>) {
     val bigCar1 : Car = Car("v8 engine", "big")
     val superCar : SuperCar = SuperCar("good engine", "big", "white")
 
+    // 인스턴스가 가지고 있는 기능을 사용하는 방법
+    val runnableCar : RunnableCar = RunnableCar("simple engine", "short")
+    // RunnableCar.ride() -> 불가능
+    runnableCar.ride()
+    runnableCar.navi("부산")
+    runnableCar.drive()
+
+    // 인스턴스의 멤버 변수에 접근 하는 방법
+    val runnableCar2 : RunnableCar2 = RunnableCar2("nice engine", "long body")
+    println(runnableCar2.body)
+    println(runnableCar2.engine)
 }
 
 // 클래스(설명서) 만드는 방법 (1)
@@ -74,5 +85,47 @@ class Car2{
         this.engine = engine
         this.body = body
         this.door = door
+    }
+}
+
+class RunnableCar(engine: String, body : String){
+    fun ride(){
+        println("탑승 하였습니다.")
+    }
+
+    fun drive(){
+        println("달립니다.")
+    }
+
+    fun navi(destination : String){
+        println("$destination 으로 목적지가 설정되었습니다.")
+    }
+
+}
+
+class RunnableCar2{
+    var engine : String
+    var body : String
+
+     constructor(engine: String, body: String){
+         this.body  = body
+         this.engine = engine
+     }
+
+    init{
+        // 초기셋팅을 할 때 유용하다.
+        println("RunnableCar2가 만듪어 졌습니다.")
+    }
+
+    fun ride(){
+        println("탑승 하였습니다.")
+    }
+
+    fun drive(){
+        println("달립니다.")
+    }
+
+    fun navi(destination : String){
+        println("$destination 으로 목적지가 설정되었습니다.")
     }
 }
