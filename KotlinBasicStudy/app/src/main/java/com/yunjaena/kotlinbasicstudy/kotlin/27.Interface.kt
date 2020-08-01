@@ -15,7 +15,7 @@ package com.yunjaena.kotlinbasicstudy.kotlin
 
 fun main(args : Array<String>){
     val student_ : Student_ = Student_()
-    
+
     student_.eat()
     student_.sleep()
 }
@@ -36,7 +36,7 @@ class Student_ : Person_{
     }
 }
 
-class SoccerPlay : Person_{
+class SoccerPlayer : Person_{
     override fun eat() {
     }
 
