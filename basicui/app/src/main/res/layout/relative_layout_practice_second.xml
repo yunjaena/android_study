@@ -14,15 +14,15 @@
     <TextView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_toLeftOf="@id/view1"
         android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/view1"
         android:background="#E91E63" />
 
     <TextView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_toRightOf="@id/view1"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/view1"
         android:background="#9C27B0" />
 
     <TextView
@@ -38,7 +38,6 @@
         android:layout_above="@id/view1"
         android:layout_centerHorizontal="true"
         android:background="#3F51B5" />
-
 
 
     <TextView
@@ -63,14 +62,11 @@
         android:background="#009688" />
 
 
-
     <TextView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/view1"
         android:layout_toRightOf="@id/view1"
         android:background="#4CAF50" />
-
-
 
 </RelativeLayout>
