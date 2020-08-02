@@ -38,5 +38,5 @@
         android:layout_height="50dp"
         android:layout_toLeftOf="@id/view1"
         android:background="#CDDC39" />
-    
+
 </RelativeLayout>
