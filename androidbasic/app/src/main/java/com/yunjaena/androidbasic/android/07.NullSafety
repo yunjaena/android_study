@@ -31,3 +31,7 @@ if(button != null){
 
 button?.setOnClickListener
 button!!.setOnClickListener
+
+Null이 될 수 있는 타입
+Int, Double, Float, Class -> Null이 될 수 없는 타입
+Int?, Double?, Float?, Class? -> Null이 될 수 있는 타입
