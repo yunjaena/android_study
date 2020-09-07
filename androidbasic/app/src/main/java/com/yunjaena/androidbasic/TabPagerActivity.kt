@@ -31,7 +31,7 @@ class TabPagerActivity : AppCompatActivity() {
                 view_pager.currentItem = tab!!.position
             }
         })
-        
+
         view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
         // -> 페이져가 이동했을때 탭을 이동시키는 코드
     }
