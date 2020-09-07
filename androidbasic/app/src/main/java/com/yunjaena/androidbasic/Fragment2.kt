@@ -17,6 +17,6 @@ class Fragment2 : Fragment() {
         // inflater -> 뷰를 그려주는 역할
         // container -> 부모뷰
         Log.d("life_cycle", "F onCreateView")
-        return inflater.inflate(R.layout.fragment_one, container, false)
+        return inflater.inflate(R.layout.fragment_two, container, false)
     }
 }

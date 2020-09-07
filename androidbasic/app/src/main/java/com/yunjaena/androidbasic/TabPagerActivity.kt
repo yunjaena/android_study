@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_tab_pager.*
 
 class TabPagerActivity : AppCompatActivity() {
@@ -15,6 +16,24 @@ class TabPagerActivity : AppCompatActivity() {
         tab_layout.addTab(tab_layout.newTab().setText("ONE"))
         tab_layout.addTab(tab_layout.newTab().setText("TWO"))
         tab_layout.addTab(tab_layout.newTab().setText("THREE"))
+
+        val pagerAdapter = PagerAdapter(supportFragmentManager, 3)
+        view_pager.adapter = pagerAdapter
+        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                view_pager.currentItem = tab!!.position
+            }
+        })
+        
+        view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
+        // -> 페이져가 이동했을때 탭을 이동시키는 코드
     }
 }
 
