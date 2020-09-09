@@ -2,15 +2,35 @@ package com.yunjaena.androidbasic
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_async.*
 
 class AsyncActivity : AppCompatActivity() {
-
+    var task: BackgroundAsyncTask? = null
+    // var task1 : BackgroundAsyncTask? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_async)
+
+        start.setOnClickListener {
+            task = BackgroundAsyncTask(progress_bar, ment)
+            // task1 = BackgroundAsyncTask(progress_bar, ment)
+            task?.execute()
+            // task1?.execute()
+        }
+
+        stop.setOnClickListener {
+            task?.cancel(true)
+            //startActivity(Intent(this, Intent2::class.java))
+        }
+    }
+
+    override fun onPause() {
+        task?.cancel(true)
+        super.onPause()
     }
 }
 
@@ -32,13 +52,14 @@ class BackgroundAsyncTask(
     override fun doInBackground(vararg params: Int?): Int {
         while (!isCancelled) {
             percent++
+            Log.d("async", "value : $percent")
             if (percent > 100) {
                 break
             } else {
                 publishProgress(percent)
             }
             try {
-                Thread.sleep(1000)
+                Thread.sleep(100)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
