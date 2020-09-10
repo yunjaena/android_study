@@ -1,5 +1,6 @@
 package com.yunjaena.androidbasic
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,13 @@ class NetworkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_network)
+        NetworkTask().execute()
 
+    }
+}
+
+class NetworkTask : AsyncTask<Any?, Any?, Any?>() {
+    override fun doInBackground(vararg params: Any?): Any? {
         var urlString = " http://mellowcode.org/json/students/"
         val url: URL = URL(urlString)
         val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
@@ -31,6 +38,9 @@ class NetworkActivity : AppCompatActivity() {
                 )
             )
             buffer = reader.readLine()
+            Log.d("conn", "inputstream : " + buffer)
         }
+
+        return null
     }
 }
