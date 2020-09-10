@@ -40,4 +40,20 @@ Json Response
      }
 ]
 
+Json Parsing
+-> Json 을 코틀린이나 자바가 이해할 수 있게 변형 하는 과정
 
+Serializable (직렬화)
+-> 자바 시스템 내부에서 사용되는 object를 외부 에서 사용할 수 있도록 byte 형태로 데이터를 바꾸는 것
+------------------------->
+    id, name, age, intro
+
+코틀린이나/ 자바가 이해할 수 있는 틀
+class Person(
+    var id : Int? = null
+    var name : String? = null
+    var age : Int? = null
+    var intro : String? = null
+)
+
+Person(1, "김아무개", 20, "안녕하세요")
