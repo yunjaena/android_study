@@ -1,0 +1,43 @@
+
+
+
+네트워크
+-> 통신
+
+DataBase <----> Server <----> Client(app,web,...)
+ 글                              A
+ 댓글                             B
+
+Local DataBase 의 한계
+- 동기화가 어렵다
+- 상호작용이 불가능 하다.
+
+서버와 통신하는 방법
+- 해당 url 로 요청한다.
+- 인증정보를 보낸다.
+- JSON 형식을 사용해셔 data를 보낸다.
+- JSON(JavaScript Object Notation) -> JavaScript 에서 객체를 만들 떄 사용하는 표현식 이다.
+
+JSON 형식
+- [] -> List
+- {} -> 객체
+    -> "" -> 문자열
+    -> ""없으면 -> 숫자
+
+Json Response
+[
+    {
+        "id" : 1,               -> 문서에 써있다.
+        "name" : "홍길동",
+        "age" : 20,
+        "intro" : "나는 홍실동이다!"
+     },
+     {
+             "id" : 2,
+             "name" : "김아무개",
+             "age" : 10,
+             "intro" : "나는 김아무개 입니다 :)"
+     }
+]
+
+
