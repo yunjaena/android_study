@@ -10,6 +10,7 @@ class Person(val name: String = "hello") {
 
 class PersonTypeTwo(var name: String?) {
     var age = 0
+    private set
 
     init {
         if (name.isNullOrEmpty())
@@ -21,6 +22,29 @@ class PersonTypeTwo(var name: String?) {
     }
 }
 
+class PersonTypeThree(email: String){
+    var email : String = email.required()
+    set(value){
+        field = value.required()
+    }
+    get() = "email : $field"
+
+
+    private fun String.required() = this.also {
+        require(it.trim().isNotEmpty()){
+            "The email can not be blank"
+        }
+    }
+
+}
+
+fun PersonTypeThree.pureEmail() : String{
+    return this.email.replace("email : ", "")
+}
+fun PersonTypeThree.clear() = this.also {
+    it.email = ""
+}
+
 fun main() {
     val personOne = Person()
     val personTwo = Person("bob", 27)
@@ -29,8 +53,15 @@ fun main() {
 
     val personThree = PersonTypeTwo(null)
     val personFour = PersonTypeTwo("bob", 27)
+    // personFour.age =2
     println(personThree.name)
     println(personFour.name)
     println(personThree.age)
     println(personFour.age)
+
+    val personTypeThree = PersonTypeThree("1")
+    println(personTypeThree.email)
+    println(personTypeThree.pureEmail())
+    println(personTypeThree.clear())
+
 }
