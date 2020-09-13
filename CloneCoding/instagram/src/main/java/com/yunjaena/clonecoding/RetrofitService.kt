@@ -15,5 +15,6 @@ interface RetrofitService {
     @POST("json/students/")
     fun createStudentEasy(@Body params: PersonFromServer): Call<PersonFromServer>
 
-
+    @POST("user/signup/")
+    fun register(@Body register: Register): Call<User>
 }

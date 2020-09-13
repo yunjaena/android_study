@@ -10,9 +10,9 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="60dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="OutStagram"
         android:textColor="#564B4B"
@@ -86,6 +86,7 @@
         android:layout_gravity="center"
         android:background="#948F8F"
         android:gravity="center"
+        android:layout_marginBottom="20dp"
         android:paddingLeft="32dp"
         android:paddingTop="16dp"
         android:paddingRight="32dp"

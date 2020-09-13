@@ -8,3 +8,4 @@ class PersonFromServer(
     var age: Int? = null,
     var intro: String? = null
 ) : Serializable
+
