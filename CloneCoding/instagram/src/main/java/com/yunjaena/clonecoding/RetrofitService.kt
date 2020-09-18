@@ -1,9 +1,7 @@
 package com.yunjaena.clonecoding
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RetrofitService {
     @GET("json/students/")
@@ -16,5 +14,10 @@ interface RetrofitService {
     fun createStudentEasy(@Body params: PersonFromServer): Call<PersonFromServer>
 
     @POST("user/signup/")
-    fun register(@Body register: Register): Call<User>
+    @FormUrlEncoded
+    fun register(
+        @Field("username") username: String,
+        @Field("password1") password1: String,
+        @Field("password2") password2: String
+    ): Call<User>
 }

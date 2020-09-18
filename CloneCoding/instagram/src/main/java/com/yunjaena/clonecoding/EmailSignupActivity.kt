@@ -3,7 +3,7 @@ package com.yunjaena.clonecoding
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.widget.Button
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -18,13 +18,14 @@ class EmailSignupActivity : AppCompatActivity() {
     lateinit var userPassword1View: EditText
     lateinit var userPassword2View: EditText
     lateinit var registerBtn: TextView
+    lateinit var loginBtn : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_email_signup)
 
         initView(this@EmailSignupActivity)
-        setupListener()
+        setupListener(this)
     }
 
     fun initView(activity: Activity) {
@@ -32,11 +33,17 @@ class EmailSignupActivity : AppCompatActivity() {
         userPassword1View = activity.findViewById(R.id.password1_inputbox)
         userPassword2View = activity.findViewById(R.id.password2_inputbox)
         registerBtn = activity.findViewById(R.id.register)
+        loginBtn = activity.findViewById(R.id.login)
     }
 
-    fun setupListener() {
+    fun setupListener(activity: Activity) {
         registerBtn.setOnClickListener {
             register(this@EmailSignupActivity)
+        }
+        loginBtn.setOnClickListener{
+            val sp = activity.getSharedPreferences("login_sp", Context.MODE_PRIVATE)
+            val token = sp.getString("login_sp","")
+            Log.d("abcc", "token : " + token)
         }
     }
 
@@ -44,8 +51,7 @@ class EmailSignupActivity : AppCompatActivity() {
         val username = getUserName()
         val password1 = getUserPassword1()
         val password2 = getUserPassword2()
-        val register = Register(username, password1, password2)
-        (application as MasterApplication).service.register(register)
+        (application as MasterApplication).service.register(username, password1, password2)
             .enqueue(object : Callback<User> {
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Toast.makeText(activity, "가입에 실패 하였습니다.", Toast.LENGTH_SHORT).show()
