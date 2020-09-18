@@ -2,6 +2,7 @@ package com.yunjaena.clonecoding
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -41,9 +42,7 @@ class EmailSignupActivity : AppCompatActivity() {
             register(this@EmailSignupActivity)
         }
         loginBtn.setOnClickListener{
-            val sp = activity.getSharedPreferences("login_sp", Context.MODE_PRIVATE)
-            val token = sp.getString("login_sp","")
-            Log.d("abcc", "token : " + token)
+            startActivity(Intent(this@EmailSignupActivity, LoginActivity::class.java))
         }
     }
 
@@ -63,6 +62,7 @@ class EmailSignupActivity : AppCompatActivity() {
                         val user = response.body()
                         val token = user!!.token!!
                         saveUserToken(token, activity)
+                        (application as MasterApplication).createRetrofit()
                     }
                 }
             })
