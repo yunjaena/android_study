@@ -24,7 +24,10 @@ interface RetrofitService {
     @POST("user/login/")
     @FormUrlEncoded
     fun login(
-        @Field("username") username : String,
-        @Field("password") password : String
-    ) : Call<User>
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Call<User>
+
+    @GET("/instagram/post/list/all/")
+    fun getAllPost(): Call<ArrayList<Post>>
 }

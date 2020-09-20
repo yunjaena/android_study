@@ -37,6 +37,12 @@ class LoginActivity : AppCompatActivity() {
                         saveUserToken(it, this@LoginActivity)
                         (application as MasterApplication).createRetrofit()
                         Toast.makeText(this@LoginActivity, "로그인 하셨습니다.", Toast.LENGTH_LONG).show()
+                        startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                OutstagramPostListActivity::class.java
+                            )
+                        )
                     }
 
                 }

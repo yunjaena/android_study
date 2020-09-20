@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -19,7 +18,7 @@ class EmailSignupActivity : AppCompatActivity() {
     lateinit var userPassword1View: EditText
     lateinit var userPassword2View: EditText
     lateinit var registerBtn: TextView
-    lateinit var loginBtn : TextView
+    lateinit var loginBtn: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +40,7 @@ class EmailSignupActivity : AppCompatActivity() {
         registerBtn.setOnClickListener {
             register(this@EmailSignupActivity)
         }
-        loginBtn.setOnClickListener{
+        loginBtn.setOnClickListener {
             startActivity(Intent(this@EmailSignupActivity, LoginActivity::class.java))
         }
     }
@@ -63,6 +62,12 @@ class EmailSignupActivity : AppCompatActivity() {
                         val token = user!!.token!!
                         saveUserToken(token, activity)
                         (application as MasterApplication).createRetrofit()
+                        activity.startActivity(
+                            Intent(
+                                activity,
+                                OutstagramPostListActivity::class.java
+                            )
+                        )
                     }
                 }
             })
