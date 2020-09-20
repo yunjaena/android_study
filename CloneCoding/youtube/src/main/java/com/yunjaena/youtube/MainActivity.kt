@@ -1,5 +1,7 @@
 package com.yunjaena.youtube
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +39,8 @@ class MainActivity : AppCompatActivity() {
                         val adapter = MytubeAdapter(
                             youtubeList!!,
                             LayoutInflater.from(this@MainActivity),
-                            glide
+                            glide,
+                            this@MainActivity
                         )
                         youtube_list_recycler_view.adapter = adapter
                     }
@@ -50,7 +53,8 @@ class MainActivity : AppCompatActivity() {
 class MytubeAdapter(
     var youtubeList: ArrayList<Youtube>,
     val inflater: LayoutInflater,
-    val glide: RequestManager
+    val glide: RequestManager,
+    val activity: Activity
 ) : RecyclerView.Adapter<MytubeAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -62,6 +66,12 @@ class MytubeAdapter(
             title = itemView.findViewById(R.id.title)
             thumbnail = itemView.findViewById(R.id.thumbnail)
             content = itemView.findViewById(R.id.content)
+            itemView.setOnClickListener {
+                val position: Int = adapterPosition
+                val intent = Intent(activity, MytubeDetailActivity::class.java)
+                intent.putExtra("video_url", youtubeList.get(position).video)
+                activity.startActivity(intent)
+            }
         }
     }
 
