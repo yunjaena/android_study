@@ -3,16 +3,21 @@
     package="com.yunjaena.clonecoding">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MasterApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OutstagramPostListActivity"></activity>
+        <activity android:name=".OutStagramUploadActivity"></activity>
+        <activity android:name=".OutStagramMyPostListActivity" />
+        <activity android:name=".OutStagramUserInfo" />
+        <activity android:name=".OutstagramPostListActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EmailSignupActivity"></activity>
+        <activity android:name=".EmailSignupActivity" />
     </application>
 
 </manifest>

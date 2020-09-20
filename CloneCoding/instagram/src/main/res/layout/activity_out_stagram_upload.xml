@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".OutstagramPostListActivity">
+    tools:context=".OutStagramUploadActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/post_recycler_view"
+    <EditText
+        android:id="@+id/content_input"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="300dp"
+        android:hint="내용을 작성해주세요." />
+
+    <TextView
+        android:id="@+id/view_pictures"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="16dp"
+        android:background="@color/cardview_dark_background"
+        android:gravity="center"
+        android:text="사진 선택"
+        android:textColor="#ffffff"
+        android:textSize="40dp" />
+
+
+    <TextView
+        android:id="@+id/upload_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_pictures"
+        android:background="@color/cardview_dark_background"
+        android:gravity="center"
+        android:text="업로드"
+        android:textColor="#ffffff"
+        android:textSize="40dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <TextView
@@ -54,4 +78,4 @@
             android:text="정보" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

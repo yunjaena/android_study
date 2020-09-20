@@ -1,5 +1,7 @@
 package com.yunjaena.clonecoding
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -30,4 +32,11 @@ interface RetrofitService {
 
     @GET("/instagram/post/list/all/")
     fun getAllPost(): Call<ArrayList<Post>>
+
+    @Multipart
+    @POST("instagram/post/")
+    fun uploadPost(
+        @Part image: MultipartBody.Part,
+        @Part("content") requestBody: RequestBody
+    ): Call<Post>
 }

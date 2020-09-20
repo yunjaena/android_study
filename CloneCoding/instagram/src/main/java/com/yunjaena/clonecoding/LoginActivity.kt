@@ -16,6 +16,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        if ((application as MasterApplication).checkIsLogin()) {
+            finish()
+            startActivity(Intent(this, OutstagramPostListActivity::class.java))
+            return
+        }
         register.setOnClickListener {
             val intent = Intent(this, EmailSignupActivity::class.java)
             startActivity(intent)

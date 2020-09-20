@@ -1,5 +1,6 @@
 package com.yunjaena.clonecoding
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,11 +44,33 @@ class OutstagramPostListActivity : AppCompatActivity() {
                             glide
                         )
                         post_recycler_view.adapter = adapter
-                        post_recycler_view.layoutManager = LinearLayoutManager(this@OutstagramPostListActivity)
+                        post_recycler_view.layoutManager =
+                            LinearLayoutManager(this@OutstagramPostListActivity)
                     }
                 }
             }
         )
+
+
+        user_info.setOnClickListener {
+            startActivity(Intent(this, OutStagramUserInfo::class.java))
+        }
+        my_list.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    OutStagramMyPostListActivity::class.java
+                )
+            )
+        }
+        upload.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    OutStagramUploadActivity::class.java
+                )
+            )
+        }
     }
 
     class PostAdapter(
