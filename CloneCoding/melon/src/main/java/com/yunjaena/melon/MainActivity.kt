@@ -1,6 +1,8 @@
 package com.yunjaena.melon
 
 import android.app.Activity
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +51,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onPause() {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        super.onPause()
+    }
+
     inner class MelonAdapter(
         var songList: ArrayList<Song>,
         val inflater: LayoutInflater,
@@ -65,6 +75,19 @@ class MainActivity : AppCompatActivity() {
                 play = itemView.findViewById(R.id.song_play)
                 play.setOnClickListener {
                     val position: Int = adapterPosition
+                    val path = songList[position].song
+                    try {
+                        mediaPlayer?.stop()
+                        mediaPlayer?.release()
+                        mediaPlayer = null
+                        mediaPlayer = MediaPlayer.create(
+                            this@MainActivity,
+                            Uri.parse(path)
+                        )
+                        mediaPlayer?.start()
+                    } catch (e: Exception) {
+
+                    }
                 }
             }
         }
