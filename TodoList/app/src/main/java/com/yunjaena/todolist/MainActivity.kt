@@ -19,14 +19,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        data.add(Todo("숙제", false))
-        data.add(Todo("청소", false))
+
+        data.add(Todo("숙제"))
+        data.add(Todo("청소"))
+
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = TodoAdapter(data)
+
+        binding.addButtonn.setOnClickListener{
+            addTodo()
+        }
+    }
+
+    private fun addTodo() {
+        val todo = Todo(binding.editText.text.toString())
+        data.add(todo)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
 
-data class Todo(val text: String, var isDone: Boolean)
+data class Todo(val text: String, var isDone: Boolean = false)
 
 class TodoAdapter(private val myDataSet: List<Todo>) :
     RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
