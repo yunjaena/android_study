@@ -24,9 +24,14 @@ class MainActivity : AppCompatActivity() {
         data.add(Todo("청소"))
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = TodoAdapter(data)
+        binding.recyclerView.adapter = TodoAdapter(data,
+            onClickDeleteIcon = {
+                deleteTodo(it)
+            }
+        )
+        // binding.recyclerView.adapter = TodoAdapter(data, this@MainActivity::deleteTodo)
 
-        binding.addButtonn.setOnClickListener{
+        binding.addButtonn.setOnClickListener {
             addTodo()
         }
     }
@@ -36,11 +41,22 @@ class MainActivity : AppCompatActivity() {
         data.add(todo)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
+
+    private fun deleteTodo(todo: Todo) {
+        data.remove(todo)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+    }
 }
 
-data class Todo(val text: String, var isDone: Boolean = false)
+data class Todo(
+    val text: String,
+    var isDone: Boolean = false
+)
 
-class TodoAdapter(private val myDataSet: List<Todo>) :
+class TodoAdapter(
+    private val myDataSet: List<Todo>,
+    val onClickDeleteIcon: (todo: Todo) -> Unit
+) :
     RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
     class TodoViewHolder(val binding: ItemTodoBinding) : RecyclerView.ViewHolder(binding.root)
@@ -54,6 +70,10 @@ class TodoAdapter(private val myDataSet: List<Todo>) :
     override fun getItemCount() = myDataSet.size
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.binding.todoText.text = myDataSet[position].text
+        val todo = myDataSet[position]
+        holder.binding.todoText.text = todo.text
+        holder.binding.deleteImageView.setOnClickListener {
+            onClickDeleteIcon.invoke(todo)
+        }
     }
 }
