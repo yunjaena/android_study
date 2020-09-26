@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.yunjaena.todolist.databinding.ActivityMainBinding
@@ -23,7 +24,6 @@ import com.yunjaena.todolist.databinding.ItemTodoBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val RC_SIGN_IN: Int = 1000
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == Companion.RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .build(),
-            RC_SIGN_IN
+            Companion.RC_SIGN_IN
         )
     }
 
@@ -111,6 +111,10 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    companion object {
+        private const val RC_SIGN_IN: Int = 1000
+    }
 }
 
 data class Todo(
@@ -119,9 +123,9 @@ data class Todo(
 )
 
 class TodoAdapter(
-    private var myDataSet: List<Todo>,
-    val onClickDeleteIcon: (todo: Todo) -> Unit,
-    val onClickItem: (todo: Todo) -> Unit
+    private var myDataSet: List<DocumentSnapshot>,
+    val onClickDeleteIcon: (todo: DocumentSnapshot) -> Unit,
+    val onClickItem: (todo: DocumentSnapshot) -> Unit
 ) :
     RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
@@ -137,8 +141,8 @@ class TodoAdapter(
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val todo = myDataSet[position]
-        holder.binding.todoText.text = todo.text
-        if (todo.isDone) {
+        holder.binding.todoText.text = todo.getString("text") ?: ""
+        if (todo.getBoolean("isDone") == true) {
             holder.binding.todoText.apply {
                 paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 setTypeface(null, Typeface.ITALIC)
@@ -159,7 +163,7 @@ class TodoAdapter(
         }
     }
 
-    fun setData(newData: List<Todo>) {
+    fun setData(newData: List<DocumentSnapshot>) {
         myDataSet = newData
         notifyDataSetChanged()
     }
@@ -167,8 +171,7 @@ class TodoAdapter(
 
 class MainViewModel : ViewModel() {
     val db = Firebase.firestore
-    val todoLiveData = MutableLiveData<List<Todo>>()
-    private val data = arrayListOf<Todo>()
+    val todoLiveData = MutableLiveData<List<DocumentSnapshot>>()
 
     init {
         fetchData()
@@ -183,22 +186,20 @@ class MainViewModel : ViewModel() {
                         return@addSnapshotListener
                     }
 
-                    data.clear()
-                    for (document in value!!) {
-                        val todo = Todo(
-                            document.getString("text") ?: "",
-                            document.getBoolean("isDone") ?: false
-                        )
-                        data.add(todo)
+                    if (value != null) {
+                        todoLiveData.value = value.documents
                     }
-                    todoLiveData.value = data
                 }
         }
     }
 
-    fun toggleTodo(todo: Todo) {
-        todo.isDone = !todo.isDone
-        todoLiveData.value = data
+    fun toggleTodo(todo: DocumentSnapshot) {
+        FirebaseAuth.getInstance().currentUser?.let { user ->
+            val isDone = todo.getBoolean("isDone") ?: false
+            db.collection(user.uid)
+                .document(todo.id)
+                .update("isDone", !isDone)
+        }
     }
 
     fun addTodo(todo: Todo) {
@@ -208,9 +209,12 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun deleteTodo(todo: Todo) {
-        data.remove(todo)
-        todoLiveData.value = data
+    fun deleteTodo(todo: DocumentSnapshot) {
+        FirebaseAuth.getInstance().currentUser?.let { user ->
+            db.collection(user.uid)
+                .document(todo.id)
+                .delete()
+        }
     }
 
 }
