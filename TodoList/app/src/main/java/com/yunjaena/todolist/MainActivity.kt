@@ -12,11 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.auth.AuthUI
 import com.yunjaena.todolist.databinding.ActivityMainBinding
 import com.yunjaena.todolist.databinding.ItemTodoBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private val RC_SIGN_IN: Int = 1000
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 
@@ -26,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
+        startActivityForResult(AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build(),
+            RC_SIGN_IN
+            )
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = TodoAdapter(
