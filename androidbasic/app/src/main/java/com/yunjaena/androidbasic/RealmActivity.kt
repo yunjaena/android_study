@@ -41,7 +41,7 @@ class RealmActivity : AppCompatActivity() {
         button_delete.setOnClickListener {
             realm.executeTransaction {
                 //it.where(School::class.java).findAll().deleteAllFromRealm()
-                it.where(School::class.java).findFirst().deleteFromRealm()
+                it.where(School::class.java).findFirst()?.deleteFromRealm()
             }
         }
     }
