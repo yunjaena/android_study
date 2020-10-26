@@ -13,7 +13,7 @@
         android:background="@android:color/holo_red_light"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Mytube"
+        android:text="@string/app_bar_title"
         android:textColor="@android:color/white"
         android:textSize="30dp"
         android:textStyle="bold" />
