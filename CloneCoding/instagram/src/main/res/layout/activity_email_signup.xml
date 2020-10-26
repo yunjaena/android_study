@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="OutStagram"
+        android:text="@string/sign_up_title"
         android:textColor="#564B4B"
         android:textSize="60dp" />
 
