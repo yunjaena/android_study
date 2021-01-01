@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
 /**
  * blockingFirst를 사용한 통지된 첫번째 데이터를 테스트하는 예제
  */
-public class BlockingFirst {
+public class BlockingFirstTest {
     // Car 리스트 중에서 첫번째 Car를 테스트
     @Test
     public void getCarStreamFirstTest(){
