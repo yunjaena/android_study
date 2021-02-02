@@ -49,3 +49,7 @@
 - Integration : 20%
 - E2E : 10%
 
+
+
+
+
