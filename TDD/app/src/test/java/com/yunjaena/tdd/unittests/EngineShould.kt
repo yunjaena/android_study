@@ -1,23 +1,29 @@
 package com.yunjaena.tdd.unittests
 
 import com.yunjaena.tdd.outsideintddexample.Engine
+import com.yunjaena.tdd.utils.MainCoroutineScopeRule
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Rule
 import org.junit.Test
 
 class EngineShould {
 
     private val engine = Engine()
 
+    @get:Rule
+    var coroutineTestRule = MainCoroutineScopeRule()
+
     @Test
-    fun turnOn() {
+    fun turnOn() = runBlockingTest{
         engine.turnOn()
 
         assertTrue(engine.isTurnedOn)
     }
 
     @Test
-    fun riseTheTemperatureWhenItTurnsOn() {
+    fun riseTheTemperatureWhenItTurnsOn() = runBlockingTest{
         engine.turnOn()
 
         assertEquals(95, engine.temperature)

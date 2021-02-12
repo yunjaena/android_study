@@ -1,9 +1,13 @@
 package com.yunjaena.tdd
 
+import com.yunjaena.tdd.utils.MainCoroutineScopeRule
 import org.junit.Assert.assertEquals
+import org.junit.Rule
 import org.junit.Test
 
 class EngineTest {
+    @get:Rule
+    var coroutineTestRule = MainCoroutineScopeRule()
 
     private val engine = Engine(2000, 189, 15, false)
 
